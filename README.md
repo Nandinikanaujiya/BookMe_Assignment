@@ -2,7 +2,7 @@
 
 [![Course](https://img.shields.io/badge/Course-CS%20543%20Web%20Services-blue.svg)]()
 [![Platform](https://img.shields.io/badge/Project-BookMe%20(Team%2011)-brightgreen.svg)]()
-[![Repository](https://img.shields.io/badge/GitHub-BookMe__Assignment-orange.svg)](https://github.com/Nandinikanaujiya/BookMe_Assignment)
+[![Repository](https://img.shields.io/badge/GitHub-BookMe__Assignment-orange.svg)](https://github.com/Radhika-Verma1/BookMe_Assignment)
 
 This repository contains the CS 543 Web Services assignments for the **BookMe** project (AI-Powered Multi-Vendor Event Service Booking Platform).
 
@@ -21,7 +21,7 @@ This repository contains the CS 543 Web Services assignments for the **BookMe** 
 
 ## 🔗 Submission Links
 
-* **GitHub Repository:** [https://github.com/Nandinikanaujiya/BookMe_Assignment](https://github.com/Nandinikanaujiya/BookMe_Assignment)
+* **GitHub Repository:** [https://github.com/Radhika-Verma1/BookMe_Assignment](https://github.com/Radhika-Verma1/BookMe_Assignment)
 * **Working Demonstration (Google Drive):** [https://drive.google.com/drive/folders/YOUR_DEMO_FOLDER_LINK?usp=sharing](https://drive.google.com/drive/folders/YOUR_DEMO_FOLDER_LINK?usp=sharing)  
   *(Share setting: Configured with "anyone with the link" permissions)*
 
@@ -36,7 +36,9 @@ BookMe_Assignment/
 │   ├── http-log.md                     # Raw curl -i diagnostics
 │   ├── network-analysis.md             # DevTools network profile
 │   ├── README.md                       # Assignment 1 overview
-│   └── docs/assignment-1.md
+│   └── docs/
+│       ├── assignment-1.md
+│       └── http-testing-guide.md
 │
 ├── Assignment-2/                       # Assignment 2: Services, Contracts & Schema
 │   ├── design.pdf                      # Capabilities, Contracts, createBooking Spec & Validation Table
@@ -47,6 +49,13 @@ BookMe_Assignment/
 │   ├── schema.sql                      # PostgreSQL CREATE TABLE DDL (Zero Shared Tables)
 │   ├── README.md                       # Detailed Assignment 2 Walkthrough
 │   └── ReadMe.pdf                      # Printable Assignment 2 Brief
+│
+├── BookMe_Assignment3/                 # Assignment 3: SOAP Partner Integration
+│   ├── integration.pdf                 # SOAP integration architecture and design brief
+│   ├── partner.wsdl                    # Web Service Description Language (WSDL 1.1) contract
+│   ├── soap-request.xml                # SOAP Request with WS-Security header
+│   ├── soap-response.xml               # SOAP success Response envelope
+│   └── soap-fault.xml                  # SOAP Fault envelope for failed charges
 │
 ├── README.md                           # Repository overview (this file)
 └── ReadMe.pdf                          # Submission brief with links and tasks
@@ -67,3 +76,11 @@ BookMe_Assignment/
   * [`schema.drawio`](Assignment-2/schema.drawio) / [`schema.png`](Assignment-2/schema.png): Database Entity-Relationship Diagram implementing private schemas and logical UUID references (Task 5).
   * [`schema.sql`](Assignment-2/schema.sql): PostgreSQL DDL table creation queries enforcing zero shared database tables (Task 5).
   * [`ReadMe.pdf`](Assignment-2/ReadMe.pdf) / [`README.md`](Assignment-2/README.md): Submission documentation and usage instructions.
+
+### 🔌 [BookMe_Assignment3/ (Assignment 3 — SOAP Partner Integration)](BookMe_Assignment3/)
+* **Files:**
+  * [`integration.pdf`](BookMe_Assignment3/integration.pdf): Architectural justification, HTTP binding, service discovery, and SOAP-to-REST fault mapping.
+  * [`partner.wsdl`](BookMe_Assignment3/partner.wsdl): Formal WSDL 1.1 contract defining service endpoints and port types.
+  * [`soap-request.xml`](BookMe_Assignment3/soap-request.xml): Hand-crafted XML envelope with WS-Security token.
+  * [`soap-response.xml`](BookMe_Assignment3/soap-response.xml): Success SOAP response with transaction details.
+  * [`soap-fault.xml`](BookMe_Assignment3/soap-fault.xml): Canonical SOAP fault envelope handling declined card scenarios.
