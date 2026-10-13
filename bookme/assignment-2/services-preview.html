@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+  body {
+    margin: 0;
+    padding: 30px;
+    background: #fdfdfd;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: #2d3748;
+  }
+  .canvas {
+    width: 1100px;
+    height: 780px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    position: relative;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+  }
+  .header {
+    background: linear-gradient(135deg, #1e3a8a, #2563eb);
+    color: white;
+    padding: 18px 24px;
+    text-align: center;
+    border-bottom: 2px solid #1d4ed8;
+  }
+  .header h1 {
+    margin: 0;
+    font-size: 20px;
+    letter-spacing: 0.5px;
+    font-weight: 700;
+  }
+  .header p {
+    margin: 4px 0 0;
+    font-size: 13px;
+    opacity: 0.9;
+  }
+  .service-card {
+    position: absolute;
+    border-radius: 8px;
+    padding: 14px 16px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08);
+    box-sizing: border-box;
+    border-width: 2px;
+    border-style: solid;
+  }
+  .card-title {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+  .card-owner {
+    font-size: 12px;
+    font-style: italic;
+    margin-bottom: 8px;
+    opacity: 0.9;
+  }
+  .divider {
+    height: 1px;
+    background: rgba(0,0,0,0.12);
+    margin: 6px 0 8px 0;
+  }
+  .data-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+  }
+  .data-list {
+    margin: 0;
+    padding-left: 18px;
+    font-size: 12px;
+    line-height: 1.45;
+  }
+  .data-list li {
+    font-family: "Courier New", Courier, monospace;
+    font-weight: 600;
+  }
+
+  /* Specific Service Cards */
+  #card-auth {
+    top: 110px;
+    left: 80px;
+    width: 250px;
+    height: 180px;
+    background: #eff6ff;
+    border-color: #3b82f6;
+    color: #1e40af;
+  }
+  #card-vendor {
+    top: 110px;
+    right: 80px;
+    width: 270px;
+    height: 195px;
+    background: #f0fdf4;
+    border-color: #22c55e;
+    color: #166534;
+  }
+  #card-booking {
+    top: 330px;
+    left: 400px;
+    width: 300px;
+    height: 185px;
+    background: #fffbeb;
+    border-color: #f59e0b;
+    color: #92400e;
+  }
+  #card-payment {
+    bottom: 40px;
+    left: 400px;
+    width: 300px;
+    height: 185px;
+    background: #fef2f2;
+    border-color: #ef4444;
+    color: #991b1b;
+  }
+  #rules-box {
+    position: absolute;
+    bottom: 50px;
+    left: 80px;
+    width: 280px;
+    background: #faf5ff;
+    border: 1.5px dashed #a855f7;
+    border-radius: 8px;
+    padding: 14px;
+    font-size: 11.5px;
+    color: #581c87;
+    line-height: 1.45;
+  }
+
+  /* SVG connectors layer */
+  svg.connectors {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10;
+  }
+  .arrow-label {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    fill: #1e293b;
+    background: white;
+  }
+  .label-bg {
+    fill: #ffffff;
+    stroke: #cbd5e1;
+    stroke-width: 1;
+    rx: 4;
+  }
+</style>
+</head>
+<body>
+
+<div class="canvas">
+  <div class="header">
+    <h1>BookMe — Service Design Benchmark &amp; Inter-Service Contracts</h1>
+    <p>CS 543 Web Services · Assignment 2 · Team 11 · Strict Data Boundary Architecture</p>
+  </div>
+
+  <svg class="connectors">
+    <defs>
+      <marker id="arrow-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563eb" />
+      </marker>
+      <marker id="arrow-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 1 L 10 5 L 0 9 z" fill="#16a34a" />
+      </marker>
+      <marker id="arrow-red" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 1 L 10 5 L 0 9 z" fill="#dc2626" />
+      </marker>
+      <marker id="arrow-amber" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 1 L 10 5 L 0 9 z" fill="#d97706" />
+      </marker>
+      <marker id="arrow-purple" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 1 L 10 5 L 0 9 z" fill="#7c3aed" />
+      </marker>
+    </defs>
+
+    <!-- Booking -> Auth (verifyCustomer) -->
+    <path d="M 440 340 C 350 320, 260 300, 220 290" fill="none" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-blue)" />
+    <rect x="260" y="300" width="105" height="20" class="label-bg" />
+    <text x="267" y="314" class="arrow-label" fill="#2563eb">verifyCustomer</text>
+
+    <!-- Booking -> Vendor (checkAvailability) -->
+    <path d="M 660 330 C 730 280, 780 250, 810 230" fill="none" stroke="#16a34a" stroke-width="2" marker-end="url(#arrow-green)" />
+    <rect x="690" y="270" width="118" height="20" class="label-bg" />
+    <text x="697" y="284" class="arrow-label" fill="#16a34a">checkAvailability</text>
+
+    <!-- Booking -> Vendor (reserveSlot) -->
+    <path d="M 700 370 C 820 370, 860 330, 870 305" fill="none" stroke="#16a34a" stroke-width="2" stroke-dasharray="4,3" marker-end="url(#arrow-green)" />
+    <rect x="740" y="355" width="85" height="20" class="label-bg" />
+    <text x="748" y="369" class="arrow-label" fill="#16a34a">reserveSlot</text>
+
+    <!-- Booking -> Payment (initiatePayment) -->
+    <path d="M 500 515 L 500 550" fill="none" stroke="#dc2626" stroke-width="2" marker-end="url(#arrow-red)" />
+    <rect x="440" y="522" width="115" height="20" class="label-bg" />
+    <text x="448" y="536" class="arrow-label" fill="#dc2626">initiatePayment</text>
+
+    <!-- Payment -> Booking (updateBookingStatus) -->
+    <path d="M 600 550 L 600 515" fill="none" stroke="#d97706" stroke-width="2" stroke-dasharray="4,3" marker-end="url(#arrow-amber)" />
+    <rect x="548" y="522" width="140" height="20" class="label-bg" />
+    <text x="555" y="536" class="arrow-label" fill="#d97706">updateBookingStatus</text>
+
+    <!-- Payment -> Vendor (getVendorPayoutAccount) -->
+    <path d="M 700 640 C 980 640, 1020 400, 960 305" fill="none" stroke="#7c3aed" stroke-width="2" marker-end="url(#arrow-purple)" />
+    <rect x="850" y="520" width="165" height="20" class="label-bg" />
+    <text x="858" y="534" class="arrow-label" fill="#7c3aed">getVendorPayoutAccount</text>
+  </svg>
+
+  <!-- Service Cards -->
+  <div class="service-card" id="card-auth">
+    <div class="card-title">Auth Service</div>
+    <div class="card-owner">Lead: Radhika Verma (20251651075)</div>
+    <div class="divider"></div>
+    <div class="data-title">Owns Data:</div>
+    <ul class="data-list">
+      <li>users</li>
+      <li>user_credentials</li>
+      <li>user_sessions</li>
+    </ul>
+  </div>
+
+  <div class="service-card" id="card-vendor">
+    <div class="card-title">Vendor Service</div>
+    <div class="card-owner">Lead: Nandini Kanaujiya (20251651061)</div>
+    <div class="divider"></div>
+    <div class="data-title">Owns Data:</div>
+    <ul class="data-list">
+      <li>vendors</li>
+      <li>services</li>
+      <li>packages</li>
+      <li>availability (calendar)</li>
+    </ul>
+  </div>
+
+  <div class="service-card" id="card-booking">
+    <div class="card-title">Event &amp; Booking Service</div>
+    <div class="card-owner">Lead: Alka Jha (20251651013) — Central Engine</div>
+    <div class="divider"></div>
+    <div class="data-title">Owns Data:</div>
+    <ul class="data-list">
+      <li>events</li>
+      <li>bookings</li>
+      <li>checklist_items</li>
+    </ul>
+  </div>
+
+  <div class="service-card" id="card-payment">
+    <div class="card-title">Payment &amp; Feedback Service</div>
+    <div class="card-owner">Lead: Alok Mishra (20251651014)</div>
+    <div class="divider"></div>
+    <div class="data-title">Owns Data:</div>
+    <ul class="data-list">
+      <li>payments</li>
+      <li>payouts</li>
+      <li>reviews</li>
+      <li>complaints</li>
+    </ul>
+  </div>
+
+  <div id="rules-box">
+    <strong style="display:block;margin-bottom:6px;font-size:12px;">🛡️ Boundary &amp; Contract Benchmark Rules</strong>
+    • <b>Zero Shared Tables:</b> No service accesses another's DB.<br>
+    • <b>Explicit Contracts:</b> Cross-service calls use REST APIs.<br>
+    • <b>Loose Coupling:</b> Cross-boundary references use UUIDs.<br>
+    • <b>Central Operation:</b> <code>createBooking</code> coordinates vendor availability check, slot reservation, and escrow payment.
+  </div>
+</div>
+
+</body>
+</html>

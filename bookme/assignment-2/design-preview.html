@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CS 543 Web Services — Assignment 2 Design Benchmark</title>
+<style>
+  @page {
+    size: A4 portrait;
+    margin: 14mm 16mm;
+  }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: #1e293b;
+    line-height: 1.45;
+    font-size: 10.5pt;
+    margin: 0;
+    padding: 0;
+    background: #ffffff;
+  }
+  .page-break {
+    page-break-after: always;
+  }
+  .doc-header {
+    border-bottom: 2.5px solid #2563eb;
+    padding-bottom: 12px;
+    margin-bottom: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .doc-title h1 {
+    margin: 0;
+    font-size: 16.5pt;
+    color: #0f172a;
+    font-weight: 800;
+  }
+  .doc-title h2 {
+    margin: 3px 0 0;
+    font-size: 11.5pt;
+    color: #2563eb;
+    font-weight: 600;
+  }
+  .doc-meta {
+    text-align: right;
+    font-size: 9pt;
+    color: #64748b;
+  }
+  .team-card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 10px 14px;
+    margin-bottom: 14px;
+    font-size: 9pt;
+  }
+  .team-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 16px;
+    margin-top: 6px;
+  }
+  .member-item {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px dotted #cbd5e1;
+    padding-bottom: 2px;
+  }
+  .member-item b {
+    color: #0f172a;
+  }
+  .member-item span {
+    color: #475569;
+  }
+
+  h3.section-title {
+    font-size: 12pt;
+    color: #0f172a;
+    margin: 16px 0 8px;
+    padding-bottom: 4px;
+    border-bottom: 1.5px solid #e2e8f0;
+  }
+  h4.sub-title {
+    font-size: 10.5pt;
+    color: #1e40af;
+    margin: 10px 0 4px;
+  }
+  p {
+    margin: 0 0 8px;
+    font-size: 9.5pt;
+    text-align: justify;
+  }
+  ul, ol {
+    margin: 4px 0 10px 20px;
+    padding: 0;
+    font-size: 9.5pt;
+  }
+  li {
+    margin-bottom: 4px;
+  }
+
+  /* Tables */
+  table.contract-tbl {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 6px 0 12px;
+    font-size: 8.5pt;
+  }
+  table.contract-tbl th, table.contract-tbl td {
+    border: 1px solid #cbd5e1;
+    padding: 5px 7px;
+    vertical-align: top;
+    text-align: left;
+  }
+  table.contract-tbl th {
+    background: #f1f5f9;
+    color: #0f172a;
+    font-weight: 700;
+  }
+  table.contract-tbl tr:nth-child(even) td {
+    background: #f8fafc;
+  }
+  code {
+    font-family: "Courier New", Courier, monospace;
+    background: #f1f5f9;
+    padding: 1px 4px;
+    border-radius: 3px;
+    font-size: 8pt;
+    color: #0f172a;
+  }
+
+  .callout {
+    background: #eff6ff;
+    border-left: 3.5px solid #3b82f6;
+    padding: 8px 12px;
+    border-radius: 0 6px 6px 0;
+    margin: 8px 0 10px;
+    font-size: 9pt;
+  }
+  .callout strong {
+    color: #1e40af;
+  }
+  .badge-repo {
+    background: #dcfce7;
+    border: 1px solid #86efac;
+    color: #166534;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 8.5pt;
+    margin-bottom: 10px;
+    display: inline-block;
+  }
+</style>
+</head>
+<body>
+
+<!-- ================================= PAGE 1 ================================= -->
+<div class="doc-header">
+  <div class="doc-title">
+    <h1>CS 543 Web Services — Assignment 2</h1>
+    <h2>Design Benchmark: Services, Contracts &amp; Schema for BookMe</h2>
+  </div>
+  <div class="doc-meta">
+    <b>Team 11</b> · CS 543<br>
+    Repository: <code>BookMe_Assignment</code><br>
+    Academic Term 2026
+  </div>
+</div>
+
+<div class="badge-repo">
+  🔗 <b>Official Repo:</b> https://github.com/Nandinikanaujiya/BookMe_Assignment
+</div>
+
+<div class="team-card">
+  <strong style="color:#1e3a8a;">👥 Team 11 Members &amp; Service Allocations:</strong>
+  <div class="team-grid">
+    <div class="member-item">
+      <b>Radhika Verma</b> (20251651075)
+      <span>Auth Service (<code>bookme/services/auth-service</code>)</span>
+    </div>
+    <div class="member-item">
+      <b>Nandini Kanaujiya</b> (20251651061)
+      <span>Vendor Service (<code>bookme/services/vendor-service</code>)</span>
+    </div>
+    <div class="member-item">
+      <b>Alka Jha</b> (20251651013)
+      <span>Event &amp; Booking Service (<code>bookme/services/event-booking-service</code>)</span>
+    </div>
+    <div class="member-item">
+      <b>Alok Mishra</b> (20251651014)
+      <span>Payment &amp; Feedback Service (<code>bookme/services/payment-feedback-service</code>)</span>
+    </div>
+  </div>
+</div>
+
+<h3 class="section-title">Task 1: System Capabilities (The Verbs) — Mapped to BookMe</h3>
+<p>
+  Directly extending the verbs and operational boundaries identified in Assignment 1 (<code>bookme/brief.md</code> § <i>Verbs — Actions and Operations</i>), the system capabilities define the distinct jobs performed by BookMe and map to dedicated microservice code modules:
+</p>
+
+<ul>
+  <li>
+    <b>1. registerAndAuthenticateUser</b> [Mapped to: <code>services/auth-service</code> · <code>POST /auth/register</code>, <code>POST /auth/login</code>]:<br>
+    Registers customer, vendor, and administrator profiles, verifies email uniqueness, securely hashes passwords using bcrypt/salt, and issues scoped JWT access tokens for role-based authorization.
+  </li>
+  <li>
+    <b>2. manageVendorCatalog</b> [Mapped to: <code>services/vendor-service</code> · <code>GET /vendors</code>, <code>POST /vendors</code>]:<br>
+    Onboards vendor business entities, maintains multi-category services (catering, photography, decoration, DJ, venue), and configures bundled pricing packages.
+  </li>
+  <li>
+    <b>3. manageCalendarAvailability</b> [Mapped to: <code>services/vendor-service</code> · <code>GET /vendors/{id}/availability</code>, <code>POST /availability/block</code>]:<br>
+    Inspects vendor calendar schedules, queries open slots, and executes date reservation locks, guaranteeing no vendor receives overlapping bookings on the same event date.
+  </li>
+  <li>
+    <b>4. planEventAndBudget</b> [Mapped to: <code>services/event-booking-service</code> · <code>POST /events</code>, <code>GET /events/{id}/checklist</code>]:<br>
+    Maintains customer event containers (target date, guest count, location), dynamically tracks planning checklist tasks, and monitors aggregated vendor bookings against financial budget limits.
+  </li>
+  <li>
+    <b>5. createBooking</b> [Mapped to: <code>services/event-booking-service</code> · <code>POST /bookings</code> — Central Engine]:<br>
+    Orchestrates multi-vendor booking reservations, snapshots agreed service rates, validates vendor calendar availability, and coordinates lifecycle state machine transitions (<code>pending</code> ➔ <code>confirmed</code> ➔ <code>completed</code> ➔ <code>cancelled</code>).
+  </li>
+  <li>
+    <b>6. processEscrowPayment</b> [Mapped to: <code>services/payment-feedback-service</code> · <code>POST /payments</code>, <code>POST /payouts</code>]:<br>
+    Charges customer payment methods, holds funds in escrow custody, processes automated gateway webhooks, and executes post-fulfillment vendor payouts.
+  </li>
+  <li>
+    <b>7. submitFeedbackAndDisputes</b> [Mapped to: <code>services/payment-feedback-service</code> · <code>POST /reviews</code>, <code>POST /complaints</code>]:<br>
+    Collects post-event customer reviews and star ratings to calibrate vendor marketplace reputation, and facilitates customer complaint arbitration.
+  </li>
+</ul>
+
+<h3 class="section-title">Task 2: Service Architecture Benchmark Overview</h3>
+<p>
+  BookMe implements a modern 4-microservice architecture adhering strictly to the <b>Service Boundary Rule</b> (each service owns its private database tables; no cross-database foreign keys; communication strictly via REST contracts):
+</p>
+<ul>
+  <li><b>Auth Service (Lead: Radhika Verma):</b> Owns <code>users</code>, <code>user_credentials</code>, <code>user_sessions</code>.</li>
+  <li><b>Vendor Service (Lead: Nandini Kanaujiya):</b> Owns <code>vendors</code>, <code>services</code>, <code>packages</code>, <code>availability</code>.</li>
+  <li><b>Event &amp; Booking Service (Lead: Alka Jha):</b> Owns <code>events</code>, <code>bookings</code>, <code>checklist_items</code>.</li>
+  <li><b>Payment &amp; Feedback Service (Lead: Alok Mishra):</b> Owns <code>payments</code>, <code>payouts</code>, <code>reviews</code>, <code>complaints</code>.</li>
+</ul>
+
+<div class="callout">
+  <strong>Benchmark Diagram Deliverables:</strong> Visual architecture mapping with inter-service operations is documented in <code>assignment-2/services.drawio</code> and exported as <code>assignment-2/services.png</code>.
+</div>
+
+<div class="page-break"></div>
+
+<!-- ================================= PAGE 2 ================================= -->
+<div class="doc-header">
+  <div class="doc-title">
+    <h1>Task 3: Service API Contracts</h1>
+    <h2>Formal Inter-Service Operation Contracts (Zero SQL / Schema Leakage)</h2>
+  </div>
+  <div class="doc-meta">Page 2 · Team 11</div>
+</div>
+
+<p>
+  Each service publishes formal operation contracts defining exact inputs, outputs, and structured domain errors. Cross-service contracts completely encapsulate internal persistence implementations (no SQL, table names, or internal schemas are exposed).
+</p>
+
+<h4 class="sub-title">1. Event &amp; Booking Service (Lead: Alka Jha — Main Service)</h4>
+<table class="contract-tbl">
+  <thead>
+    <tr>
+      <th style="width:20%;">Operation</th>
+      <th style="width:30%;">Inputs</th>
+      <th style="width:25%;">Outputs</th>
+      <th style="width:25%;">Errors</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><b>createBooking</b></td>
+      <td><code>eventId</code>, <code>vendorId</code>, <code>packageId</code>, <code>date</code></td>
+      <td><code>bookingId</code>, <code>status</code>, <code>priceSnapshot</code>, <code>vendorNameSnapshot</code></td>
+      <td><code>EVENT_NOT_FOUND</code>, <code>SLOT_UNAVAILABLE</code>, <code>PACKAGE_NOT_FOUND</code>, <code>UNAUTHORIZED</code></td>
+    </tr>
+    <tr>
+      <td><b>getBookingStatus</b></td>
+      <td><code>bookingId</code></td>
+      <td><code>bookingId</code>, <code>status</code>, <code>date</code>, <code>updatedAt</code></td>
+      <td><code>BOOKING_NOT_FOUND</code>, <code>UNAUTHORIZED</code></td>
+    </tr>
+    <tr>
+      <td><b>cancelBooking</b></td>
+      <td><code>bookingId</code>, <code>reason</code></td>
+      <td><code>bookingId</code>, <code>status: 'cancelled'</code>, <code>cancellationTimestamp</code></td>
+      <td><code>BOOKING_NOT_FOUND</code>, <code>ALREADY_COMPLETED</code>, <code>NON_CANCELLABLE_WINDOW</code></td>
+    </tr>
+    <tr>
+      <td><b>createEvent</b></td>
+      <td><code>customerId</code>, <code>name</code>, <code>date</code>, <code>budget</code>, <code>guestCount</code></td>
+      <td><code>eventId</code>, <code>createdAt</code></td>
+      <td><code>INVALID_DATE</code>, <code>INVALID_BUDGET</code>, <code>CUSTOMER_NOT_FOUND</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 class="sub-title">2. Vendor Service (Lead: Nandini Kanaujiya — Main Service)</h4>
+<table class="contract-tbl">
+  <thead>
+    <tr>
+      <th style="width:20%;">Operation</th>
+      <th style="width:30%;">Inputs</th>
+      <th style="width:25%;">Outputs</th>
+      <th style="width:25%;">Errors</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><b>getVendorCatalog</b></td>
+      <td><code>vendorId</code></td>
+      <td><code>vendorProfile</code>, <code>servicesList</code>, <code>packagesList</code></td>
+      <td><code>VENDOR_NOT_FOUND</code>, <code>VENDOR_INACTIVE</code></td>
+    </tr>
+    <tr>
+      <td><b>checkAvailability</b></td>
+      <td><code>vendorId</code>, <code>date</code></td>
+      <td><code>isAvailable: boolean</code>, <code>status</code></td>
+      <td><code>VENDOR_NOT_FOUND</code>, <code>INVALID_DATE_FORMAT</code></td>
+    </tr>
+    <tr>
+      <td><b>reserveSlot</b></td>
+      <td><code>vendorId</code>, <code>date</code>, <code>bookingReference</code></td>
+      <td><code>reservationId</code>, <code>status: 'BLOCKED'</code></td>
+      <td><code>VENDOR_NOT_FOUND</code>, <code>SLOT_ALREADY_BLOCKED</code>, <code>PAST_DATE_NOT_ALLOWED</code></td>
+    </tr>
+    <tr>
+      <td><b>createPackage</b></td>
+      <td><code>vendorId</code>, <code>name</code>, <code>price</code>, <code>serviceIds</code></td>
+      <td><code>packageId</code>, <code>createdAt</code></td>
+      <td><code>VENDOR_NOT_FOUND</code>, <code>INVALID_SERVICES_LIST</code>, <code>PRICE_INVALID</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 class="sub-title">3. Auth Service (Lead: Radhika Verma)</h4>
+<table class="contract-tbl">
+  <thead>
+    <tr>
+      <th style="width:20%;">Operation</th>
+      <th style="width:30%;">Inputs</th>
+      <th style="width:25%;">Outputs</th>
+      <th style="width:25%;">Errors</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><b>registerUser</b></td>
+      <td><code>name</code>, <code>email</code>, <code>phone</code>, <code>role</code>, <code>password</code></td>
+      <td><code>userId</code>, <code>name</code>, <code>email</code>, <code>role</code></td>
+      <td><code>EMAIL_ALREADY_REGISTERED</code>, <code>WEAK_PASSWORD</code>, <code>INVALID_PHONE</code></td>
+    </tr>
+    <tr>
+      <td><b>authenticateUser</b></td>
+      <td><code>email</code>, <code>password</code></td>
+      <td><code>accessToken</code>, <code>refreshToken</code>, <code>userSummary</code></td>
+      <td><code>INVALID_CREDENTIALS</code>, <code>ACCOUNT_DISABLED</code></td>
+    </tr>
+    <tr>
+      <td><b>verifyCustomer</b></td>
+      <td><code>authToken</code></td>
+      <td><code>userId</code>, <code>role</code>, <code>isActive</code></td>
+      <td><code>TOKEN_EXPIRED</code>, <code>TOKEN_INVALID</code>, <code>UNAUTHORIZED</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 class="sub-title">4. Payment &amp; Feedback Service (Lead: Alok Mishra)</h4>
+<table class="contract-tbl">
+  <thead>
+    <tr>
+      <th style="width:20%;">Operation</th>
+      <th style="width:30%;">Inputs</th>
+      <th style="width:25%;">Outputs</th>
+      <th style="width:25%;">Errors</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><b>initiatePayment</b></td>
+      <td><code>bookingId</code>, <code>amount</code>, <code>paymentMethod</code></td>
+      <td><code>paymentId</code>, <code>status: 'pending'</code>, <code>gatewayRef</code></td>
+      <td><code>INVALID_AMOUNT</code>, <code>PAYMENT_METHOD_UNSUPPORTED</code>, <code>GATEWAY_ERROR</code></td>
+    </tr>
+    <tr>
+      <td><b>processPayout</b></td>
+      <td><code>vendorId</code>, <code>bookingId</code>, <code>amount</code></td>
+      <td><code>payoutId</code>, <code>status: 'completed'</code>, <code>timestamp</code></td>
+      <td><code>VENDOR_NOT_FOUND</code>, <code>BOOKING_NOT_COMPLETED</code>, <code>PAYOUT_FAILED</code></td>
+    </tr>
+    <tr>
+      <td><b>submitReview</b></td>
+      <td><code>bookingId</code>, <code>vendorId</code>, <code>customerId</code>, <code>rating</code>, <code>comment</code></td>
+      <td><code>reviewId</code>, <code>submittedAt</code></td>
+      <td><code>BOOKING_NOT_FULFILLED</code>, <code>DUPLICATE_REVIEW</code>, <code>INVALID_RATING</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="page-break"></div>
+
+<!-- ================================= PAGE 3 ================================= -->
+<div class="doc-header">
+  <div class="doc-title">
+    <h1>Task 4: Specification of Central Operation</h1>
+    <h2>Operation: createBooking (Full Input, Output, Errors &amp; Encapsulation)</h2>
+  </div>
+  <div class="doc-meta">Page 3 · Team 11</div>
+</div>
+
+<h4 class="sub-title">1. Operation Signature &amp; Purpose in BookMe</h4>
+<p>
+  <b>Endpoint:</b> <code>POST /api/v1/bookings</code> (Exposed by <code>services/event-booking-service</code>)<br>
+  <b>Purpose:</b> Central coordination endpoint for reserving a vendor package for a customer event. It validates customer credentials, checks vendor availability, freezes rates to prevent post-booking price revisions, reserves the calendar date atomically, and initiates the payment escrow lifecycle.
+</p>
+
+<h4 class="sub-title">2. Request Inputs (Caller Request Payload)</h4>
+<ul>
+  <li><code>eventId</code> (UUID, Required): ID of the customer's parent event container.</li>
+  <li><code>vendorId</code> (String, Required): Target vendor identifier (e.g. <code>vnd_sunset_caterers</code>).</li>
+  <li><code>packageId</code> (String, Required): Selected service bundle identifier (e.g. <code>pkg_royal_buffet</code>).</li>
+  <li><code>date</code> (ISO Date String <code>YYYY-MM-DD</code>, Required): Scheduled date of service delivery.</li>
+  <li><code>customizationNotes</code> (String, Optional): Specific dietary or scheduling requirements.</li>
+</ul>
+
+<h4 class="sub-title">3. Response Outputs (201 Created Response Payload)</h4>
+<ul>
+  <li><code>bookingId</code> (UUID): Globally unique system identifier for the new booking ticket.</li>
+  <li><code>eventId</code> (UUID): Echoed parent event reference.</li>
+  <li><code>status</code> (String): Initialized state machine status: <code>"pending"</code> (awaiting escrow funding).</li>
+  <li><code>vendorNameSnapshot</code> (String): Frozen business name at the moment of booking creation.</li>
+  <li><code>priceSnapshot</code> (Decimal): Frozen rate for the booked package, insulating buyer and seller from catalog price fluctuations.</li>
+  <li><code>date</code> (String): Confirmed calendar event date.</li>
+  <li><code>createdAt</code> (Timestamp): ISO-8601 creation timestamp.</li>
+</ul>
+
+<h4 class="sub-title">4. Error Cases &amp; HTTP Status Codes</h4>
+<ul>
+  <li><b>400 Bad Request (<code>INVALID_BOOKING_DATE</code>):</b> The requested date is in the past or exceeds maximum reservation horizon (18 months).</li>
+  <li><b>401 Unauthorized (<code>UNAUTHENTICATED</code>):</b> Missing, forged, or expired customer JWT bearer authorization token.</li>
+  <li><b>404 Not Found (<code>EVENT_NOT_FOUND</code> / <code>PACKAGE_NOT_FOUND</code>):</b> Specified event container or vendor package does not exist.</li>
+  <li><b>409 Conflict (<code>SLOT_UNAVAILABLE</code>):</b> The vendor already has a confirmed booking or blocked calendar status for that date.</li>
+  <li><b>422 Unprocessable Entity (<code>BUDGET_EXCEEDED</code>):</b> Booking total exceeds the event's configured hard spending limit.</li>
+  <li><b>503 Service Unavailable (<code>VENDOR_SERVICE_TIMEOUT</code>):</b> Downstream vendor catalog/availability check failed to respond within latency SLA (3000ms).</li>
+</ul>
+
+<h4 class="sub-title">5. Implementation Encapsulation (Hidden Internal Details)</h4>
+<p>
+  To maintain strict loose coupling and domain independence, <code>createBooking</code> encapsulates and conceals the following internal mechanics from callers:
+</p>
+<ul>
+  <li><b>Database Table Persistence:</b> Callers are completely isolated from internal schemas. They do not know that placing a booking creates rows in <code>bookings</code>, mutates event aggregated budget tallies, and registers a <code>checklist_items</code> milestone.</li>
+  <li><b>Distributed Orchestration &amp; Idempotency:</b> The Booking Service orchestrates two synchronous downstream calls: (1) <code>GET /api/vendors/{id}/availability?date=...</code> to verify open slots, and (2) <code>POST /api/vendors/{id}/availability/block</code> to atomically reserve the date. If downstream payment authorization fails, a compensation transaction frees the calendar block.</li>
+  <li><b>Contract Price Snapshotting:</b> The caller sends only a <code>packageId</code>. The service queries <code>vendor-service</code> to fetch the authoritative catalog price and vendor trade name, snapshotting them permanently onto the booking record.</li>
+  <li><b>Event Bus Notification:</b> After committing the booking record, the service asynchronously publishes an <code>order.booking_created</code> event to RabbitMQ/Redis to alert notification services without blocking the HTTP response.</li>
+</ul>
+
+<div class="page-break"></div>
+
+<!-- ================================= PAGE 4 ================================= -->
+<div class="doc-header">
+  <div class="doc-title">
+    <h1>Task 5 &amp; 6: Schema Benchmark &amp; Service Validation</h1>
+    <h2>Entity Relationship Rules &amp; Core Service Property Audit</h2>
+  </div>
+  <div class="doc-meta">Page 4 · Team 11</div>
+</div>
+
+<h3 class="section-title">Task 5: Database Schema Benchmark Summary</h3>
+<p>
+  Directly implementing the entities defined in Assignment 1 (<code>bookme/brief.md</code> § <i>Nouns — Entities and Resources</i>), persistence is isolated via the <b>Database-Per-Service pattern</b>. All cross-service foreign keys are eliminated and replaced by logical string/UUID identifiers.
+</p>
+<ul>
+  <li><b>Auth DB:</b> <code>users</code> (id PK), <code>user_credentials</code> (user_id PK, FK), <code>user_sessions</code> (id PK, user_id FK).</li>
+  <li><b>Vendor DB:</b> <code>vendors</code> (id PK), <code>services</code> (id PK, vendor_id FK), <code>packages</code> (id PK, vendor_id FK), <code>availability</code> (id PK, vendor_id FK, date UNIQUE).</li>
+  <li><b>Event &amp; Booking DB:</b> <code>events</code> (id PK), <code>bookings</code> (id PK, event_id FK), <code>checklist_items</code> (id PK, event_id FK).</li>
+  <li><b>Payment &amp; Feedback DB:</b> <code>payments</code> (id PK), <code>payouts</code> (id PK), <code>reviews</code> (id PK), <code>complaints</code> (id PK).</li>
+</ul>
+<div class="callout">
+  <strong>Benchmark DDL &amp; ER Diagrams:</strong> Full PostgreSQL DDL script is provided in <code>assignment-2/schema.sql</code>, and editable ER diagram is available in <code>assignment-2/schema.drawio</code> and exported as <code>assignment-2/schema.png</code>.
+</div>
+
+<h3 class="section-title">Task 6: Service Property Validation</h3>
+<p>
+  Each identified service is audited against the five fundamental properties of a Service: <b>Reachable</b>, <b>Self-Contained</b>, <b>Has a Contract</b>, <b>Independent</b>, and <b>Loosely Coupled</b>.
+</p>
+
+<table class="contract-tbl">
+  <thead>
+    <tr>
+      <th style="width:18%;">Service &amp; Owner</th>
+      <th style="width:12%;">Property</th>
+      <th style="width:12%;">Status</th>
+      <th style="width:58%;">Evaluation &amp; Remediation / Fix Strategy</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td rowspan="5"><b>Auth Service</b><br><small>Radhika Verma<br>(20251651075)</small></td>
+      <td>Reachable</td>
+      <td><span style="color:green;font-weight:bold;">PASS</span></td>
+      <td>Accessible over standard HTTP/REST endpoints (<code>/api/auth/*</code>).</td>
+    </tr>
+    <tr>
+      <td>Self-Contained</td>
+      <td><span style="color:green;font-weight:bold;">PASS</span></td>
+      <td>Owns user accounts, credentials, and token revocation tables without dependencies.</td>
+    </tr>
+    <tr>
+      <td>Has a Contract</td>
+      <td><span style="color:green;font-weight:bold;">PASS</span></td>
+      <td>Explicit OpenAPI/Markdown contract for login, registration, and token verification.</td>
+    </tr>
+    <tr>
+      <td>Independent</td>
+      <td><span style="color:green;font-weight:bold;">PASS</span></td>
+      <td>Can be deployed, restarted, and scaled horizontally with zero downtime for other services.</td>
+    </tr>
+    <tr>
+      <td>Loosely Coupled</td>
+      <td><span style="color:green;font-weight:bold;">PASS</span></td>
+      <td>Downstream services verify stateless JWT public keys locally without making synchronous auth calls.</td>
+    </tr>
+
+    <tr>
+      <td rowspan="5"><b>Vendor Service</b><br><small>Nandini Kanaujiya<br>(20251651061)</small></td>
+      <td>Reachable</td>
+      <td><span style="color:green;font-weight:bold;">PASS</span></td>
+      <td>Accessible via standard REST API routes (<code>/api/vendors/*</code>).</td>
+    </tr>
+    <tr>
+      <td>Self-Contained</td>
+      <td><span style="color:green;font-weight:bold;">PASS</span></td>
+      <td>Owns vendor profiles, service packages, and date availability tables.</td>
+    </tr>
+    <tr>
+      <td>Has a Contract</td>
+      <td><span style="color:green;font-weight:bold;">PASS</span></td>
+      <td>Published contract for catalog lookups, slot checks, and calendar reservations.</td>
+    </tr>
+    <tr>
+      <td>Independent</td>
+      <td><span style="color:green;font-weight:bold;">PASS</span></td>
+      <td>Possesses dedicated database; vendor management functions continue even if payment service is down.</td>
+    </tr>
+    <tr>
+      <td>Loosely Coupled</td>
+      <td><span style="color:green;font-weight:bold;">PASS</span></td>
+      <td>Uses logical customer IDs from Auth Service without database joins.</td>
+    </tr>
+
+    <tr>
+      <td rowspan="5"><b>Event &amp; Booking Service</b><br><small>Alka Jha<br>(20251651013)</small></td>
+      <td>Reachable</td>
+      <td><span style="color:green;font-weight:bold;">PASS</span></td>
+      <td>Exposed on dedicated network port and gateway routes (<code>/api/events</code>, <code>/api/bookings</code>).</td>
+    </tr>
+    <tr>
+      <td>Self-Contained</td>
+      <td><span style="color:green;font-weight:bold;">PASS</span></td>
+      <td>Maintains event records, checklist states, and booking state machines.</td>
+    </tr>
+    <tr>
+      <td>Has a Contract</td>
+      <td><span style="color:green;font-weight:bold;">PASS</span></td>
+      <td>Full specification for <code>createBooking</code>, status transitions, and checklist actions.</td>
+    </tr>
+    <tr>
+      <td>Independent</td>
+      <td><span style="color:green;font-weight:bold;">PASS</span></td>
+      <td>Functions as a standalone orchestration service with private Postgres storage.</td>
+    </tr>
+    <tr>
+      <td>Loosely Coupled</td>
+      <td><span style="color:orange;font-weight:bold;">TRADE-OFF</span></td>
+      <td><b>Potential Bottleneck:</b> Synchronous slot availability checks during booking creation couple latency.<br><b>Fix/Remediation:</b> Implement short-lived caching for vendor availability and use an asynchronous Saga/Outbox pattern with compensation rollback if payment fails.</td>
+    </tr>
+
+    <tr>
+      <td rowspan="5"><b>Payment &amp; Feedback Service</b><br><small>Alok Mishra<br>(20251651014)</small></td>
+      <td>Reachable</td>
+      <td><span style="color:green;font-weight:bold;">PASS</span></td>
+      <td>Accessible via endpoints (<code>/api/payments</code>, <code>/api/payouts</code>, <code>/api/reviews</code>).</td>
+    </tr>
+    <tr>
+      <td>Self-Contained</td>
+      <td><span style="color:green;font-weight:bold;">PASS</span></td>
+      <td>Owns transaction ledgers, escrow records, reviews, and dispute tickets.</td>
+    </tr>
+    <tr>
+      <td>Has a Contract</td>
+      <td><span style="color:green;font-weight:bold;">PASS</span></td>
+      <td>Documented contracts for payment initiation, gateway webhooks, and reviews.</td>
+    </tr>
+    <tr>
+      <td>Independent</td>
+      <td><span style="color:green;font-weight:bold;">PASS</span></td>
+      <td>Can process asynchronous payout batches and reviews independently of booking traffic.</td>
+    </tr>
+    <tr>
+      <td>Loosely Coupled</td>
+      <td><span style="color:green;font-weight:bold;">PASS</span></td>
+      <td>Notifies Booking Service of payment completion via asynchronous webhook/patch pattern.</td>
+    </tr>
+  </tbody>
+</table>
+
+</body>
+</html>
