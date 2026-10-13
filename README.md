@@ -4,7 +4,7 @@
 [![Platform](https://img.shields.io/badge/Project-BookMe%20(Team%2011)-brightgreen.svg)]()
 [![Repository](https://img.shields.io/badge/GitHub-BookMe__Assignment-orange.svg)](https://github.com/Nandinikanaujiya/BookMe_Assignment)
 
-Welcome to the official repository for the **CS 543 Web Services** assignments implemented with respect to the semester course project: **BookMe — AI-Powered Multi-Vendor Event Service Booking Platform**.
+This repository contains the CS 543 Web Services assignments for the **BookMe** project (AI-Powered Multi-Vendor Event Service Booking Platform).
 
 ---
 
@@ -19,26 +19,51 @@ Welcome to the official repository for the **CS 543 Web Services** assignments i
 
 ---
 
-## 🔗 Submission & Working Demonstration Links
+## 🔗 Submission Links
 
 * **GitHub Repository:** [https://github.com/Nandinikanaujiya/BookMe_Assignment](https://github.com/Nandinikanaujiya/BookMe_Assignment)
 * **Working Demonstration (Google Drive):** [https://drive.google.com/drive/folders/YOUR_DEMO_FOLDER_LINK?usp=sharing](https://drive.google.com/drive/folders/YOUR_DEMO_FOLDER_LINK?usp=sharing)  
-  *(Share setting: Configured with "anyone with the link" permissions for grading access)*
+  *(Share setting: Configured with "anyone with the link" permissions)*
 
 ---
 
-## 📂 Quick Links to Assignments
+## 📂 Repository Structure
 
-### 📝 [Assignment 1 — HTTP by Hand & Project Setup](bookme/docs/assignment-1.md)
-* **Project Architectural Brief:** [`bookme/brief.md`](bookme/brief.md) (Identified Nouns & Verbs)
-* **HTTP Diagnostics Log:** [`bookme/http-log.md`](bookme/http-log.md) (Raw `curl -i` requests and header analysis)
-* **Browser DevTools Profiling:** [`bookme/network-analysis.md`](bookme/network-analysis.md)
-* **Assignment Summary:** [`bookme/docs/assignment-1.md`](bookme/docs/assignment-1.md)
+```
+BookMe_Assignment/
+├── bookme/                             # Assignment 1: HTTP by Hand & Project Setup
+│   ├── brief.md                        # Project brief (Nouns & Verbs)
+│   ├── http-log.md                     # Raw curl -i diagnostics
+│   ├── network-analysis.md             # DevTools network profile
+│   ├── README.md                       # Assignment 1 overview
+│   └── docs/assignment-1.md
+│
+├── Assignment-2/                       # Assignment 2: Services, Contracts & Schema
+│   ├── design.pdf                      # Capabilities, Contracts, createBooking Spec & Validation Table
+│   ├── services.drawio                 # Editable Draw.io Service Architecture Benchmark
+│   ├── services.png                    # Exported Service Architecture image
+│   ├── schema.drawio                   # Editable Draw.io Database Schema ERD
+│   ├── schema.png                      # Exported Database Schema image
+│   ├── schema.sql                      # PostgreSQL CREATE TABLE DDL (Zero Shared Tables)
+│   ├── README.md                       # Detailed Assignment 2 Walkthrough
+│   └── ReadMe.pdf                      # Printable Assignment 2 Brief
+│
+├── README.md                           # Repository overview (this file)
+└── ReadMe.pdf                          # Submission brief with links and tasks
+```
 
-### 🚀 [Assignment 2 — Design BookMe: Services, Contracts & Schema](bookme/docs/assignment-2.md)
-* **Design Benchmark Document:** [`bookme/assignment-2/design.pdf`](bookme/assignment-2/design.pdf) (Capabilities, Contracts, `createBooking` Spec & Validation Table)
-* **Service Architecture Benchmark Diagram:** [`bookme/assignment-2/services.drawio`](bookme/assignment-2/services.drawio) (Editable Draw.io) / [`bookme/assignment-2/services.png`](bookme/assignment-2/services.png) (Exported Image)
-* **Database Schema ERD Benchmark:** [`bookme/assignment-2/schema.drawio`](bookme/assignment-2/schema.drawio) (Editable Draw.io) / [`bookme/assignment-2/schema.png`](bookme/assignment-2/schema.png) (Exported Image)
-* **Database DDL:** [`bookme/assignment-2/schema.sql`](bookme/assignment-2/schema.sql) (PostgreSQL schema with strict boundary isolation)
-* **Submission Brief PDF:** [`ReadMe.pdf`](ReadMe.pdf) / [`bookme/assignment-2/ReadMe.pdf`](bookme/assignment-2/ReadMe.pdf)
-* **Assignment 2 Codebase Guide:** [`bookme/docs/assignment-2.md`](bookme/docs/assignment-2.md)
+---
+
+## 📋 Assignments Overview
+
+### 📝 [bookme/ (Assignment 1 — HTTP Diagnostics & Project Setup)](bookme/)
+* **Files:** [`bookme/brief.md`](bookme/brief.md), [`bookme/http-log.md`](bookme/http-log.md), [`bookme/network-analysis.md`](bookme/network-analysis.md), [`bookme/docs/assignment-1.md`](bookme/docs/assignment-1.md).
+* **Summary:** Analysis of HTTP request/response headers, browser DevTools network waterfalls, and definition of initial BookMe system entities and operations.
+
+### 🚀 [Assignment-2/ (Assignment 2 — Design BookMe: Services, Contracts & Schema)](Assignment-2/)
+* **Files:**
+  * [`design.pdf`](Assignment-2/design.pdf): 7 Capabilities (Task 1), Contracts (Task 3), `createBooking` Full Specification (Task 4), and Service Validation Table (Task 6).
+  * [`services.drawio`](Assignment-2/services.drawio) / [`services.png`](Assignment-2/services.png): 4 microservices with explicit boundaries, data ownership, team members, and inter-service call operations (Task 2).
+  * [`schema.drawio`](Assignment-2/schema.drawio) / [`schema.png`](Assignment-2/schema.png): Database Entity-Relationship Diagram implementing private schemas and logical UUID references (Task 5).
+  * [`schema.sql`](Assignment-2/schema.sql): PostgreSQL DDL table creation queries enforcing zero shared database tables (Task 5).
+  * [`ReadMe.pdf`](Assignment-2/ReadMe.pdf) / [`README.md`](Assignment-2/README.md): Submission documentation and usage instructions.
