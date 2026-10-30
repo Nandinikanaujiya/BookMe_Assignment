@@ -22,8 +22,6 @@ This repository contains the CS 543 Web Services assignments for the **BookMe** 
 ## 🔗 Submission Links
 
 * **GitHub Repository:** [https://github.com/Radhika-Verma1/BookMe_Assignment](https://github.com/Radhika-Verma1/BookMe_Assignment)
-* **Working Demonstration (Google Drive):** [https://drive.google.com/drive/folders/YOUR_DEMO_FOLDER_LINK?usp=sharing](https://drive.google.com/drive/folders/YOUR_DEMO_FOLDER_LINK?usp=sharing)  
-  *(Share setting: Configured with "anyone with the link" permissions)*
 
 ---
 
